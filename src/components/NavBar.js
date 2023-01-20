@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 const Nav = (props) => {
 
@@ -6,9 +7,8 @@ const Nav = (props) => {
     if (isHeader) {
         return (
             <nav className="header_navbar">
-                <a className="header__link" href="#">Inicio</a>
-                <a className="header__link" href="#">Cervezas</a>
-                <a className="header__link" href="#">Vinos</a>
+                <Link className="header__link" to="/cervezas">Cervezas</Link>
+                <Link className="header__link" to="/vinos">Vinos</Link>
                 <span className="material-icons">shopping_cart</span>
             </nav>
         )
