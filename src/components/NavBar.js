@@ -1,18 +1,21 @@
 
-const Nav = (parametro) => {
-    if (parametro.isHeader) {
+const Nav = (props) => {
+
+    const{isHeader, hrefLinkFooter, textLinkFooter} = props
+
+    if (isHeader) {
         return (
             <nav className="header_navbar">
                 <a className="header__link" href="#">Inicio</a>
                 <a className="header__link" href="#">Cervezas</a>
                 <a className="header__link" href="#">Vinos</a>
+                <span className="material-icons">shopping_cart</span>
             </nav>
         )
     } else {
         return (
             <nav className="header_navbar">
-                {/* social links */}
-                <a href="#">Facebook</a>
+                <a href={hrefLinkFooter}>{textLinkFooter}</a>
             </nav>
         )
     }
