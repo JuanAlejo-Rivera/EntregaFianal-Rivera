@@ -8,8 +8,8 @@ const Main = () => {
                 {/* <h2>Home</h2>
                 <ItemListContainer /> */}
                 <Route path="/" element={<ItemListContainer/>}/>
-                <Route path="/Cervezas" element={<p>Cenvezas</p>}/>
-                <Route path="/Vinos" element={<p>Vinos</p>}/>
+                <Route path="/productos/:categoria" element={<ItemListContainer/>}/>
+                {/* <Route path="/Vinos" element={<p>Vinos</p>}/> */}
             </Routes>
         </main>
     )
