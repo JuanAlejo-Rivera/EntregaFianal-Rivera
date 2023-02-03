@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import ItemList from "./ItemList"
 
-const ItemListContainer = (props) => {
+const ItemListContainer = () => {
 
   const [load, setLoad] = useState(false)
   const [productos, setProductos] = useState([])
 
+  const props = useParams()
+  console.log(props.categoria)
   useEffect(() => {
     const pedido = fetch("https://fakestoreapi.com/products")
 
@@ -15,7 +18,7 @@ const ItemListContainer = (props) => {
       return productos
     })
       .then((productos) => {
-        //console.log(productos)
+        // productos.filter(props.categoria)    
         setProductos(productos)
         setLoad(true)
       })
@@ -47,7 +50,7 @@ const ItemListContainer = (props) => {
       <button onClick={handleClick}>sumar</button>
       <p>{cargo ? "Cargando.. " : "Termino de cargar"}</p>
       <p>{load ? "Productos Cargados" : "Cargando..."}</p>
-      <ItemList productos = {productos}/>
+      <ItemList productos={productos} />
     </div>
   )
 }
