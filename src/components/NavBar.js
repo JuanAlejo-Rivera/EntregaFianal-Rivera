@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
+import Cardwidget from "./CardWidget"
 
 const Nav = (props) => {
 
@@ -7,11 +8,9 @@ const Nav = (props) => {
     if (isHeader) {
         return (
             <nav className="header_navbar">
-                <Link className="header__link" to="/productos/cervezas">Cervezas</Link>
-                <Link className="header__link" to="/productos/vinos">Vinos</Link>
-                <Link to="/carrito">
-                    <span className="material-icons">shopping_cart</span>
-                </Link>
+                <NavLink className="header__link" to="/productos/cervezas">Cervezas</NavLink>
+                <NavLink className="header__link" to="/productos/vinos">Vinos</NavLink>
+                <Cardwidget/>
             </nav>
         )
     } else {

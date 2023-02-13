@@ -1,57 +1,43 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
 import ItemList from "./ItemList"
+import { db } from "../firebase"
+import { collection, getDocs, Query } from "firebase/firestore"
+import { toast } from "react-toastify"
+
+
 
 const ItemListContainer = () => {
 
   const [load, setLoad] = useState(false)
   const [productos, setProductos] = useState([])
 
-  const props = useParams()
-  console.log(props.categoria)
+
   useEffect(() => {
-    const pedido = fetch("https://fakestoreapi.com/products")
+    toast.info("Cargando productos")
 
-    pedido.then((respuesta) => {
+    const productosCollection = collection(db, "Productos")//CollectionReference/Query
+    const pedidoFirestore = getDocs(productosCollection)
 
-      const productos = respuesta.json()
-      return productos
-    })
-      .then((productos) => {
-        // productos.filter(props.categoria)    
+    pedidoFirestore
+      .then((respuesta) => {
+
+        const productos = respuesta.docs.map(doc => ({ ...doc.data(), id: doc.id }))
         setProductos(productos)
         setLoad(true)
+        toast.dismiss()
+        toast.success("productos cargados")
       })
       .catch((error) => {
-        console.log(error)
+        toast.error("Hubo un error, vuelva a intentarlo" + error.message)
       })
-  }, [])
-
-  const [contador, setContador] = useState(0)
-
-  const handleClick = () => {
-    setContador(contador + 1)
-  }
-  const [cargo, setCargo] = useState(true)
-
-  useEffect(() => {
-    console.log("Pidiendo algo al servidor")
-    setTimeout(() => {
-      console.log("Termino de pedir al servidor")
-      setCargo(false)
-    }, 2000)
 
   }, [])
 
   return (
-    <div>
-      {props.greeting}
-      <p>Contador : {contador}</p>
-      <button onClick={handleClick}>sumar</button>
-      <p>{cargo ? "Cargando.. " : "Termino de cargar"}</p>
-      <p>{load ? "Productos Cargados" : "Cargando..."}</p>
+    <>
+      <p>{load ? null : "Cargando..."}</p>
       <ItemList productos={productos} />
-    </div>
+    </>
   )
 }
 

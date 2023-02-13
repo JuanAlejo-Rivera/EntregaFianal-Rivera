@@ -1,17 +1,22 @@
 import { BrowserRouter } from "react-router-dom";
+import CustomProvider from "./CustomProvider";
 import Footer from "./Footer";
 import Header from "./Header"
 import ItemListContainer from "./ItemListContainer";
 import Main from "./Main"
-
+import "react-toastify/dist/ReactToastify.css"
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Header />
-      <Main />
-      <Footer />
-    </BrowserRouter>
+    <CustomProvider>
+      <BrowserRouter>
+        <Header />
+        <Main />
+        <Footer />
+      </BrowserRouter>
+      <ToastContainer/>
+    </CustomProvider>
   )
 }
 

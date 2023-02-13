@@ -1,5 +1,9 @@
+import { useCarrito } from "./CustomProvider"
 import Nav from "./NavBar"
 const Footer = () => {
+
+const {totalProductos} = useCarrito()
+
     return (
         <footer>
             <p>copyright &copy; 2022</p>
